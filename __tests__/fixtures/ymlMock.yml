@@ -1,0 +1,16 @@
+automatic: 
+    base: 
+        useTypesAsLabels: []
+        namesForTypes: [epic]
+        semVersionsForTypes: [release]
+    head:
+        useTypesAsLabels: []
+        namesForTypes: []
+        semVersionsForTypes: []
+file:
+  - iOS:
+      any: ['**/iOS/**']
+  - Android: 
+      any: ['**/Android/**']
+  - CI:
+      all: ['!**/Android/**','!**/iOS/**']
