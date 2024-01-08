@@ -34,7 +34,8 @@ const defaultFileChanges = ()=> [
  const defaultEmptyPatternConfig = () => {
   return {
     matchConfigs: [] as generator.MatchConfig[],
-    automatic: defaultEmptyLabelerConfigAutomatic()
+    automatic: defaultEmptyLabelerConfigAutomatic(),
+    files: {'root': 'SDK'}
   }
  }
 
@@ -94,7 +95,7 @@ describe('Labels Generator tests', () => {
           params.patternConfig.matchConfigs = [iOSPattern]
           params.fileChanges = defaultFileChanges()
           const typeLabels = generator.getLabels(params);
-          expect(typeLabels).toEqual([{name: 'iOS', "isMatching": true}]);
+          expect(typeLabels).toEqual([{name: 'iOS', "isMatching": true}, {name: 'Common', "isMatching": true}]);
         });
       });
     

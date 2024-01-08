@@ -7,6 +7,8 @@ automatic:
         useTypesAsLabels: []
         namesForTypes: []
         semVersionsForTypes: []
+    files:
+        subfoldersInRoot: "SDK"
 file:
   - iOS:
       any: ['**/iOS/**']

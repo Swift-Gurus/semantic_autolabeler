@@ -20,8 +20,8 @@ export const context = {
       }
     },
     repo: {
-      owner: 'unity-ads-team',
-      repo: 'unity-ads'
+      owner: 'owner',
+      repo: 'repo'
     },
     data: {
       labels: [

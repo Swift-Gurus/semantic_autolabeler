@@ -11,11 +11,16 @@ export interface LabelConfig {
 export interface PatternConfig {
     matchConfigs: MatchConfig[]
     automatic: BranchPatterns
+    files: ChangesAutoPatterns
 }
 
 export interface BranchPatterns {
     head: BranchAutomatic
     base: BranchAutomatic
+}
+
+export interface ChangesAutoPatterns {
+    root: String
 }
 
 export interface BranchAutomatic {
@@ -41,8 +46,18 @@ export const getLabels = (params: LabelsParams): LabelConfig[] =>   {
     let sets: Set<LabelConfig>[] = params.patternConfig.matchConfigs.map ((pattern) => getOrGenerateLabel(pattern, params.fileChanges));
     sets.push(generateAutomaticLabels(params.baseInfo, params.patternConfig.automatic.base))
     sets.push(generateAutomaticLabels(params.headInfo, params.patternConfig.automatic.head))
+    sets.push(generateAutomaticLabelsForFiles(params))
+
+    const outputSet = new Set();
+    
     const mergedSet = sets.reduce((acc, set) => new Set([...acc, ...set]), new Set<LabelConfig>())
-    return Array.from(mergedSet).filter((cfg) => cfg.name.length > 1);
+    const arr = Array.from(mergedSet).filter((cfg) => cfg.name.length > 1);
+
+    return arr.filter(item => !outputSet.has(JSON.stringify(item)) 
+    ? outputSet.add(JSON.stringify(item)) 
+    : false
+    );
+    
 }
 
 const generateAutomaticLabels =(branchInfo: BranchInfo, automatic: BranchAutomatic): Set<LabelConfig> => {
@@ -60,6 +75,39 @@ const generateAutomaticLabels =(branchInfo: BranchInfo, automatic: BranchAutomat
     }
 
     return labels
+}
+
+const generateAutomaticLabelsForFiles = (params: LabelsParams): Set<LabelConfig> => {
+    const labels: Set<LabelConfig> = new Set<LabelConfig>();
+    const root = params.patternConfig.files.root;
+    const fileChanges = params.fileChanges.filter((file) => file.includes(root.toString()))
+                                          .flatMap((file) => extractLabelNameFromFile(file, root.toString()))
+                                          .filter((file) => file.length > 1)
+                                          .map((file) => ({ name: file, isMatching: true }))
+
+     for (const file of fileChanges) {
+        labels.add(file)
+     }                                     
+
+    return labels
+}
+
+const extractLabelNameFromFile = (file: String, root: String): string => {
+    if (!file.includes(`\/${root.toString()}\/`)) {
+        return '';
+    }
+    let input = (file.split(`\/${root.toString()}\/`)[1] ?? '')
+    let split = input.split('/')
+    if (split.length < 2) {
+        return '';
+    }
+    // const regex = new RegExp(/\/([^\/]+)\/[^\/]+$/);
+    // const match = input.match(regex);
+    // let value = ''
+    // if (match && match[1]) {
+    //     value = match[1];
+    // }
+    return split[0] ?? '';
 }
 
 

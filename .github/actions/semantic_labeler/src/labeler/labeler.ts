@@ -78,7 +78,10 @@ export const getPatterns = (configurationPath: string, prInfo: PullRequestInfo):
 
     const patternConfig = {
         matchConfigs: config.files,
-        automatic: automatic 
+        automatic: automatic,
+        files: {
+            root: config.automatic.files.subfoldersInRoot
+        }
     }
 
     return {

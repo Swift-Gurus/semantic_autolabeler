@@ -56,10 +56,10 @@ describe('run', () => {
     expect(setLabelsMock).toHaveBeenCalledTimes(1);
 
     expect(setLabelsMock).toHaveBeenCalledWith({
-      owner: 'unity-ads-team',
-      repo: 'unity-ads',
+      owner: 'owner',
+      repo: 'repo',
       issue_number: 123,
-      labels: ['iOS','4.2.0']
+      labels: ['iOS','4.2.0', 'Public']
     });
   });
 
@@ -73,8 +73,8 @@ describe('run', () => {
     expect(setLabelsMock).toHaveBeenCalledTimes(1);
 
     expect(setLabelsMock).toHaveBeenCalledWith({
-      owner: 'unity-ads-team',
-      repo: 'unity-ads',
+      owner: 'owner',
+      repo: 'repo',
       issue_number: 123,
       labels: ['Android','4.2.0']
     });
@@ -91,8 +91,8 @@ describe('run', () => {
     expect(setLabelsMock).toHaveBeenCalledTimes(1);
 
     expect(setLabelsMock).toHaveBeenCalledWith({
-      owner: 'unity-ads-team',
-      repo: 'unity-ads',
+      owner: 'owner',
+      repo: 'repo',
       issue_number: 123,
       labels: ['CI','4.2.0']
     });
@@ -109,8 +109,8 @@ describe('run', () => {
     expect(setLabelsMock).toHaveBeenCalledTimes(1);
 
     expect(setLabelsMock).toHaveBeenCalledWith({
-      owner: 'unity-ads-team',
-      repo: 'unity-ads',
+      owner: 'owner',
+      repo: 'repo',
       issue_number: 123,
       labels: ['Android','4.2.0']
     });
@@ -126,8 +126,8 @@ describe('run', () => {
     expect(setLabelsMock).toHaveBeenCalledTimes(1);
 
     expect(setLabelsMock).toHaveBeenCalledWith({
-      owner: 'unity-ads-team',
-      repo: 'unity-ads',
+      owner: 'owner',
+      repo: 'repo',
       issue_number: 123,
       labels: ['User Defined','Android','4.2.0']
     });

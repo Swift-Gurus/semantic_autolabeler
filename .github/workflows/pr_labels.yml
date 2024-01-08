@@ -4,12 +4,9 @@ on:
       yml-path:
         required: true
         type: string
-    secrets:
-      token:
-        required: true
 
 jobs:
-  triage:
+  labels:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

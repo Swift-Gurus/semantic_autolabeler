@@ -11,7 +11,10 @@ export const labelerMockConfig = ()  => {
                 'useTypesAsLabels': [],
                 'namesForTypes': [],
                 'semVersionsForTypes': [],
-            }
+            },
+            'files': {
+                'subfoldersInRoot': 'SDK',
+            },
             
         },
         

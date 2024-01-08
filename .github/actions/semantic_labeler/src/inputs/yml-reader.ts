@@ -56,10 +56,15 @@ interface PatternMatch {
 interface LabelerConfigAutomatic {
     head: BranchConfig
     base: BranchConfig
+    files: FoldersConfig
 }
 
 interface BranchConfig {
     useTypesAsLabels: string[]
     namesForTypes: string[]
     semVersionsForTypes: string[]
+}
+
+interface FoldersConfig {
+    subfoldersInRoot: string
 }
